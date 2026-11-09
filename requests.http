@@ -1,0 +1,61 @@
+@baseUrl = http://localhost:10000
+
+### 1. Проверка доступности
+GET {{baseUrl}}/
+
+### 2. Информация об API
+GET {{baseUrl}}/api/info
+
+### 3. Получить всех игроков
+GET {{baseUrl}}/api/players
+
+### 4. Получить игрока по ID
+GET {{baseUrl}}/api/players/1
+
+### 5. Проверить 404
+GET {{baseUrl}}/api/players/999
+
+### 6. Поиск по никнейму или названию игры
+GET {{baseUrl}}/api/players?search=cyber
+
+### 7. Фильтр по игре
+GET {{baseUrl}}/api/players?game=Valorant
+
+### 8. Создать игрока (в ответе будет ID; скопируйте его в следующие запросы)
+POST {{baseUrl}}/api/players
+Content-Type: application/json
+
+{
+  "nickname": "ApiTester",
+  "game": "Valorant",
+  "rating": 1200,
+  "wins": 8,
+  "losses": 3
+}
+
+### 9. Изменить игрока (замените 8 на ID, который вернул POST)
+PUT {{baseUrl}}/api/players/8
+Content-Type: application/json
+
+{
+  "nickname": "ApiTesterUpdated",
+  "game": "Counter-Strike 2",
+  "rating": 1350,
+  "wins": 10,
+  "losses": 3
+}
+
+### 10. Некорректный запрос — ожидается 400
+POST {{baseUrl}}/api/players
+Content-Type: application/json
+
+{
+  "nickname": "",
+  "game": "",
+  "rating": -1,
+  "wins": -1,
+  "losses": -1
+}
+
+### 11. Удалить тестового игрока (замените 8 на его ID)
+DELETE {{baseUrl}}/api/players/8
